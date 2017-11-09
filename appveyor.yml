@@ -1,0 +1,52 @@
+version: '{build}'
+image: Visual Studio 2017
+#need set environment variable or it's not working in cache
+environment:
+
+  nasm_Version: 2.13.01
+
+#set password not work....
+#  APPVEYOR_RDP_PASSWORD:
+#    secure: K6XkhLVN7PZDnWWtrTKYneDPMS7FgBFYYe1xuU2s8js=
+
+#rdp debug
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+install:
+#  - cmd
+#  - set nasm_Version=2.13.01
+  - curl -kLO http://www.nasm.us/pub/nasm/releasebuilds/2.13.01/win64/nasm-%nasm_Version%-win64.zip -f --retry 5 -C -
+  - 7z x nasm-%nasm_Version%-win64.zip -o.
+  - SET PATH=%PATH%;%APPVEYOR_BUILD_FOLDER%\nasm-%nasm_Version%
+  - if exist VCdeps.7z (curl -kLo VCdeps.7z https://ci.appveyor.com/api/projects/craftwar_appveyor/obs-deps/artifacts/VCdeps.7z -f --retry 5 -z VCdeps.7z) else (curl -kLo VCdeps.7z https://ci.appveyor.com/api/projects/craftwar_appveyor/obs-deps/artifacts/VCdeps.7z -f --retry 5 -C -)
+  - 7z x VCdeps.7z -odependencies2017
+  - del /Q x264\libs\64bit\*.*
+  - copy /Y dependencies2017\win64\include\x264*.* x264
+  - copy /Y dependencies2017\win64\bin\libx264* x264\libs\64bit
+  - copy /Y dependencies2017\win64\lib\libx264.lib x264\libs\64bit
+
+build_script:
+#  - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" injectHelper\injectHelper.sln
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" GraphicsCapture\GraphicsCaptureHook\GraphicsCaptureHook.vcxproj
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+#  - devenv OBS-All.sln /upgrade
+  - cd lame
+  - nmake -f Makefile.MSVC CPU=P3 MSVCVER=Win64
+  - copy /Y output\libmp3lame-static.lib output\64bit\libmp3lame-static.lib
+  - cd ..
+  - msbuild /m /p:Configuration=Release OBS-All.sln
+#  - cmd
+#  - msbuild /m /p:Configuration=Release libfaac\libfaac.sln
+#  - msbuild /m /p:Configuration=Release libmfx\libmfx.sln
+#  - msbuild /m /p:Configuration=Release librtmp\librtmp.sln
+#  - msbuild /m /p:Configuration=Release libsamplerate\libsamplerate.sln
+#  - msbuild /m /p:Configuration=Release OBS.sln
+  - cd installer
+  - call generate_binaries.bat
+  - 7z a %APPVEYOR_BUILD_FOLDER%\obs.7z -mx=9 -myx=9 64bit
+artifacts:
+  - path: obs.7z
+#cache:
+#  - 'zlib-%zlib_Version%.tar.xz'

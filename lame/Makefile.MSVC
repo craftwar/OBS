@@ -547,7 +547,7 @@ ASM_OBJ = $(ASM_OBJ) \
 .SUFFIXES : .nas
 .nas.obj:
 	@echo $<
-	@nasmw -f $(OFF) -i libmp3lame/i386/ -DWIN32 $< -o $@
+	@nasm -f $(OFF) -i libmp3lame/i386/ -DWIN32 $< -o $@
 
 CC_SWITCHES = $(CC_SWITCHES) /DHAVE_NASM
 ASM_OBJ = $(ASM_OBJ) \

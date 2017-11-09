@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <windows.h>
 #include <shellapi.h>
+#include <intrin.h>
 
 #include <fstream>
 #include <sstream>
