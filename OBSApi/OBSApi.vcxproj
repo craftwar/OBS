@@ -116,7 +116,7 @@
       <PrecompiledHeaderFile>XT.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;psapi.lib;libsamplerate.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;Kernel32.lib;libsamplerate.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../libsamplerate/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\rundir\pdb32\$(TargetName).pdb</ProgramDatabaseFile>
@@ -154,7 +154,7 @@
       <StripPrivateSymbols>..\rundir\pdb64\stripped\$(TargetName).pdb</StripPrivateSymbols>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>winmm.lib;psapi.lib;libsamplerate.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;Kernel32.lib;libsamplerate.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(OutDir)$(ProjectName).dll ..\rundir</Command>
@@ -177,7 +177,7 @@
       <AdditionalOptions>/Zo %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;psapi.lib;libsamplerate.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;Kernel32.lib;libsamplerate.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../libsamplerate/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\rundir\pdb32\$(TargetName).pdb</ProgramDatabaseFile>
@@ -213,7 +213,7 @@
       <AdditionalOptions>/d2Zi+ %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;psapi.lib;libsamplerate.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;Kernel32.lib;libsamplerate.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../libsamplerate/x64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>..\rundir\pdb64\$(TargetName).pdb</ProgramDatabaseFile>

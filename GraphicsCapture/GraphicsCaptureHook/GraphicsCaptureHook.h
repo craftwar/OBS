@@ -19,14 +19,13 @@
 
 #pragma once
 
-#define WINVER         0x0600
-#define _WIN32_WINDOWS 0x0600
-#define _WIN32_WINNT   0x0600
+#define WINVER         0x0601
+#define _WIN32_WINDOWS 0x0601
+#define _WIN32_WINNT   0x0601
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <shlobj.h>
 
-#define PSAPI_VERSION 1
 #include <psapi.h>
 
 #pragma intrinsic(memcpy, memset, memcmp)
