@@ -1,5 +1,6 @@
-#define _WIN32_WINDOWS 0x0410
-#define _WIN32_WINNT   0x0403
+#define WINVER         0x0601
+#define _WIN32_WINDOWS 0x0601
+#define _WIN32_WINNT   0x0601
 #include <windows.h>
 #include "XT.h"
 

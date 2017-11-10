@@ -19,10 +19,10 @@
 
 #pragma once
 
-#define WINVER         0x0600
-#define _WIN32_WINDOWS 0x0600
-#define _WIN32_WINNT   0x0600
-#define NTDDI_VERSION  NTDDI_VISTASP1
+#define WINVER         0x0601
+#define _WIN32_WINDOWS 0x0601
+#define _WIN32_WINNT   0x0601
+#define NTDDI_VERSION  NTDDI_WIN7
 
 #define WIN32_LEAN_AND_MEAN
 #define ISOLATION_AWARE_ENABLED 1
