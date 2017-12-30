@@ -3,7 +3,7 @@ image: Visual Studio 2017
 #need set environment variable or it's not working in cache
 environment:
 
-  nasm_Version: 2.13.01
+  nasm_Version: 2.13.02
 
 #set password not work....
 #  APPVEYOR_RDP_PASSWORD:
@@ -11,11 +11,11 @@ environment:
 
 #rdp debug
 init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: if ($env:rdp -eq "1") { iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1')) }
 install:
-#  - cmd
+  #- cmd
 #  - set nasm_Version=2.13.01
-  - curl -kLO http://www.nasm.us/pub/nasm/releasebuilds/2.13.01/win64/nasm-%nasm_Version%-win64.zip -f --retry 5 -C -
+  - curl -kLO http://www.nasm.us/pub/nasm/releasebuilds/%nasm_Version%/win64/nasm-%nasm_Version%-win64.zip -f --retry 5 -C -
   - 7z x nasm-%nasm_Version%-win64.zip -o.
   - SET PATH=%PATH%;%APPVEYOR_BUILD_FOLDER%\nasm-%nasm_Version%
   - if exist VCdeps.7z (curl -kLo VCdeps.7z https://ci.appveyor.com/api/projects/craftwar_appveyor/obs-deps/artifacts/VCdeps.7z -f --retry 5 -z VCdeps.7z) else (curl -kLo VCdeps.7z https://ci.appveyor.com/api/projects/craftwar_appveyor/obs-deps/artifacts/VCdeps.7z -f --retry 5 -C -)
@@ -27,7 +27,7 @@ install:
 
 build_script:
 #  - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
+  - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64_x86' #use cross build x86 to speed up
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" injectHelper\injectHelper.sln
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" GraphicsCapture\GraphicsCaptureHook\GraphicsCaptureHook.vcxproj
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
@@ -45,6 +45,7 @@ build_script:
 #  - msbuild /m /p:Configuration=Release OBS.sln
   - cd installer
   - call generate_binaries.bat
+  - copy z.cmd 64bit
   - 7z a %APPVEYOR_BUILD_FOLDER%\obs.7z -mx=9 -myx=9 64bit
 artifacts:
   - path: obs.7z
