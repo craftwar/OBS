@@ -88,6 +88,7 @@ extern TCHAR        lpAppDataPath[MAX_PATH];
 #define OBS_VERSION_STRING_ANSI OBS_VERSION_STRING_RAW OBS_VERSION_SUFFIX
 #define OBS_VERSION_STRING      TEXT(OBS_VERSION_STRING_RAW) TEXT(OBS_VERSION_SUFFIX)
 
+#define OBS_DISABLE_AUTOUPDATE 1
 #ifdef _DEBUG
 #define OBS_DISABLE_AUTOUPDATE 1
 #endif
@@ -125,5 +126,5 @@ void WINAPI ProcessEvents();
 #include "CodeTokenizer.h"
 #include "D3D10System.h"
 #include "HTTPClient.h"
-#include "Updater.h"
+//#include "Updater.h"
 

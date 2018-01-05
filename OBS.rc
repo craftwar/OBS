@@ -852,11 +852,17 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_ICON1               ICON                    "ui\\test2\\test.ico"
+
 IDI_SOUND_MIC           ICON                    "ui\\mic2.ico"
+
 IDI_SOUND_MIC_MUTED     ICON                    "ui\\mic2-muted.ico"
+
 IDI_SOUND_DESKTOP       ICON                    "ui\\speaker.ico"
+
 IDI_SOUND_DESKTOP_MUTED ICON                    "ui\\speaker-muted.ico"
+
 IDI_ICON2               ICON                    "ui\\test2\\recording.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1000,7 +1006,6 @@ BEGIN
         END
         MENUITEM "MainMenu.Settings.OpenLogFolder", ID_SETTINGS_OPENLOGFOLDER
         MENUITEM SEPARATOR
-        MENUITEM "MainMenu.Help.CheckForUpdates", ID_HELP_CHECK_FOR_UPDATES
     END
 END
 
@@ -1011,6 +1016,7 @@ END
 //
 
 IDC_COLORPICKER         CURSOR                  "cursor1.cur"
+
 #endif    // Japanese (Japan) resources
 /////////////////////////////////////////////////////////////////////////////
 

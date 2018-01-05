@@ -3672,10 +3672,11 @@ LRESULT CALLBACK OBS::OBSProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
                 case ID_HELP_OPENHELP:
                     ShellExecute(NULL, TEXT("open"), TEXT("http://jp9000.github.io/OBS/"), 0, 0, SW_SHOWNORMAL);
                     break;
-
+/*
                 case ID_HELP_CHECK_FOR_UPDATES:
                     OSCloseThread(OSCreateThread((XTHREAD)CheckUpdateThread, (LPVOID)1));
                     break;
+*/
 
                 case ID_HELP_ANALYZE_CURRENT_LOG:
                 case ID_HELP_UPLOAD_CURRENT_LOG:

@@ -1,6 +1,7 @@
 *.exe
 *.dll
 
+.vs
 tests and backups/
 publish/
 Release_MD/
