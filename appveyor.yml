@@ -46,9 +46,11 @@ build_script:
   - cd installer
   - call generate_binaries.bat
   - copy z.cmd 64bit
-  - 7z a %APPVEYOR_BUILD_FOLDER%\obs.7z -mx=9 -myx=9 64bit
+  - cd 64bit
+  - 7z a %APPVEYOR_BUILD_FOLDER%\obs.7z -mx=9 -myx=9 *
 test: off
 artifacts:
   - path: obs.7z
-#cache:
+cache:
+  - VCdeps.7z
 #  - 'zlib-%zlib_Version%.tar.xz'
