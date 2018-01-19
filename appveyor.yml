@@ -47,6 +47,7 @@ build_script:
   - call generate_binaries.bat
   - copy z.cmd 64bit
   - 7z a %APPVEYOR_BUILD_FOLDER%\obs.7z -mx=9 -myx=9 64bit
+test: off
 artifacts:
   - path: obs.7z
 #cache:
