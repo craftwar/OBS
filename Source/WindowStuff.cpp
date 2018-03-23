@@ -3542,7 +3542,7 @@ String OBS::GetApplicationName()
     // that the 32 bit version doesn't work or something.
     name << "Profile: " << App->GetCurrentProfile() << " - " << "Scenes: " << App->GetCurrentSceneCollection() << L" - " OBS_VERSION_STRING
 #ifdef _WIN64
-    L" - 64bit";
+    L" - by Craftwar";
 #else
     L"";
 #endif
