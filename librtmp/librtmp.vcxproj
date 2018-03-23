@@ -146,6 +146,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalOptions>/Zo %(AdditionalOptions)</AdditionalOptions>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

@@ -179,7 +179,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <PrecompiledHeaderFile>GraphicsCaptureHook.h</PrecompiledHeaderFile>
       <OmitFramePointers>true</OmitFramePointers>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>

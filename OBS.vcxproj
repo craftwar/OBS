@@ -198,6 +198,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderFile>Main.h</PrecompiledHeaderFile>
       <AdditionalOptions>/Zo %(AdditionalOptions)</AdditionalOptions>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <AdditionalOptions>/ignore:4049 /ignore:4217 %(AdditionalOptions)</AdditionalOptions>
