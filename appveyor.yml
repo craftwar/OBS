@@ -3,7 +3,7 @@ image: Visual Studio 2017
 #need set environment variable or it's not working in cache
 environment:
 
-  nasm_Version: 2.13.02
+  nasm_Version: 2.13.03
 
 #set password not work....
 #  APPVEYOR_RDP_PASSWORD:
@@ -27,16 +27,17 @@ install:
 
 build_script:
 #  - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
+  - set CL=/arch:AVX2 /Oi
   - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64_x86' #use cross build x86 to speed up
-  - msbuild /m /p:Configuration=Release /p:Platform="Win32" injectHelper\injectHelper.sln
-  - msbuild /m /p:Configuration=Release /p:Platform="Win32" GraphicsCapture\GraphicsCaptureHook\GraphicsCaptureHook.vcxproj
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" injectHelper\injectHelper.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" GraphicsCapture\GraphicsCaptureHook\GraphicsCaptureHook.vcxproj /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
 #  - devenv OBS-All.sln /upgrade
   - cd lame
-  - nmake -f Makefile.MSVC CPU=P3 MSVCVER=Win64
+  - nmake -f Makefile.MSVC MSVCVER=Win64 # add /NOLOGO if don't want copyright, specify P3 may be slower in newer CPU
   - copy /Y output\libmp3lame-static.lib output\64bit\libmp3lame-static.lib
   - cd ..
-  - msbuild /m /p:Configuration=Release OBS-All.sln
+  - msbuild /m /p:Configuration=Release OBS-All.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 #  - cmd
 #  - msbuild /m /p:Configuration=Release libfaac\libfaac.sln
 #  - msbuild /m /p:Configuration=Release libmfx\libmfx.sln

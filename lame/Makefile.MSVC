@@ -209,7 +209,7 @@ LIB_OPTS = /nologo $(MACHINE)
 
 # release options
 !	IF "$(MSVCVER)" == "Win64"
-CC_OPTS = /nologo /DWin64 /O2b2ity /GAy /Gs1024 /Zp8 /GL /GS- /Zi
+CC_OPTS = /nologo /DWin64 /O2b2ity /GAy /Gs1024 /Zp8 /GL /GS- /Zi /arch:AVX2 /Oi
 !	ELSEIF "$(MSVCVER)" == "8.0"
 CC_OPTS = /nologo /O2 /Wp64 /Oi /GL /arch:SSE /fp:precise
 !	ELSEif "$(CPU)"=="P6"
