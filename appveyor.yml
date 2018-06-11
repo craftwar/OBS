@@ -55,6 +55,15 @@ build_script:
 test: off
 artifacts:
   - path: obs.7z
+deploy:
+  - provider: GitHub
+    release: git
+#    description: $(APPVEYOR_REPO_COMMIT)
+    auth_token:
+      secure: KxeGOEgx0+XWdjLWDsyhC+B/w3m8zpvtVY/e+90lCLZgd/2VSuraPZDxdIPB5rfY
+    force_update: true
+    on:
+      branch: master
 cache:
   - VCdeps.7z
 #  - 'zlib-%zlib_Version%.tar.xz'
