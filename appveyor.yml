@@ -2,8 +2,10 @@ version: '{build}'
 image: Visual Studio 2017
 #need set environment variable or it's not working in cache
 environment:
-
   nasm_Version: 2.13.03
+  matrix:
+    - favor_arch: AMD64
+    - favor_arch: INTEL64
 
 #set password not work....
 #  APPVEYOR_RDP_PASSWORD:
@@ -18,8 +20,9 @@ install:
   - curl -kLO http://www.nasm.us/pub/nasm/releasebuilds/%nasm_Version%/win64/nasm-%nasm_Version%-win64.zip -f --retry 5 -C -
   - 7z x nasm-%nasm_Version%-win64.zip -o.
   - SET PATH=%PATH%;%APPVEYOR_BUILD_FOLDER%\nasm-%nasm_Version%
-  - if exist VCdeps.7z (curl -kLo VCdeps.7z https://ci.appveyor.com/api/projects/craftwar_appveyor/obs-deps/artifacts/VCdeps.7z -f --retry 5 -z VCdeps.7z) else (curl -kLo VCdeps.7z https://ci.appveyor.com/api/projects/craftwar_appveyor/obs-deps/artifacts/VCdeps.7z -f --retry 5 -C -)
-  - 7z x VCdeps.7z -odependencies2017
+  - set VCdeps_url=https://github.com/craftwar/obs-deps/releases/download/git/VCdeps-%favor_arch%.7z
+  - if exist VCdeps-%favor_arch%.7z (curl -kLo VCdeps-%favor_arch%.7z %VCdeps_url% -f --retry 5 -z VCdeps-%favor_arch%.7z) else (curl -kLo VCdeps-%favor_arch%.7z %VCdeps_url% -f --retry 5 -C -)
+  - 7z x VCdeps-%favor_arch%.7z -odependencies2017
   - del /Q x264\libs\64bit\*.*
   - copy /Y dependencies2017\win64\include\x264*.* x264
   - copy /Y dependencies2017\win64\bin\libx264* x264\libs\64bit
@@ -28,13 +31,13 @@ install:
 build_script:
 #  - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
 #  - devenv OBS-All.sln /upgrade
-  - set CL=/arch:AVX2 /Oi
+#  - set CL=/arch:AVX2 /Oi
 #x86
   - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64_x86' #use cross build x86 to speed up
-  - msbuild /m /p:Configuration=Release /p:Platform="Win32" injectHelper\injectHelper.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" injectHelper\injectHelper.vcxproj /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" GraphicsCapture\GraphicsCaptureHook\GraphicsCaptureHook.vcxproj /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"						
 #x64
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
   - cd lame
   - nmake -f Makefile.MSVC MSVCVER=Win64 # add /NOLOGO if don't want copyright, specify P3 may be slower in newer CPU
   - copy /Y output\libmp3lame-static.lib output\64bit\libmp3lame-static.lib
@@ -51,10 +54,10 @@ build_script:
   - call generate_binaries.bat
   - copy z.cmd 64bit
   - cd 64bit
-  - 7z a %APPVEYOR_BUILD_FOLDER%\obs.7z -mx=9 -myx=9 *
+  - 7z a %APPVEYOR_BUILD_FOLDER%\obs-%favor_arch%.7z -mx=9 -myx=9 *
 test: off
 artifacts:
-  - path: obs.7z
+  - path: 'obs-%favor_arch%.7z'
 deploy:
   - provider: GitHub
     release: git
@@ -65,5 +68,5 @@ deploy:
     on:
       branch: master
 cache:
-  - VCdeps.7z
+  - 'VCdeps-%favor_arch%.7z'
 #  - 'zlib-%zlib_Version%.tar.xz'
