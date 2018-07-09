@@ -175,7 +175,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <ExceptionHandling>false</ExceptionHandling>
       <PrecompiledHeaderFile>GraphicsCapture.h</PrecompiledHeaderFile>
-      <AdditionalOptions>/Zo %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/Zo /Gw %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OBSApi.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -211,7 +211,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <PrecompiledHeaderFile>GraphicsCapture.h</PrecompiledHeaderFile>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalOptions>/d2Zi+ %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/d2Zi+ /Gw /favor:$(favor_arch) %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OBSApi.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
