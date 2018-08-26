@@ -176,6 +176,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <PrecompiledHeaderFile>GraphicsCapture.h</PrecompiledHeaderFile>
       <AdditionalOptions>/Zo /Gw %(AdditionalOptions)</AdditionalOptions>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OBSApi.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -212,6 +213,7 @@
       <PrecompiledHeaderFile>GraphicsCapture.h</PrecompiledHeaderFile>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalOptions>/d2Zi+ /Gw /favor:$(favor_arch) %(AdditionalOptions)</AdditionalOptions>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OBSApi.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>

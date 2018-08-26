@@ -199,6 +199,7 @@
       <PrecompiledHeaderFile>Main.h</PrecompiledHeaderFile>
       <AdditionalOptions>/Zo /Gw %(AdditionalOptions)</AdditionalOptions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalOptions>/ignore:4049 /ignore:4217 %(AdditionalOptions)</AdditionalOptions>
@@ -247,6 +248,7 @@
       <PrecompiledHeaderFile>Main.h</PrecompiledHeaderFile>
       <AdditionalOptions>/d2Zi+ /Gw /favor:$(favor_arch) %(AdditionalOptions)</AdditionalOptions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>crypt32.lib;Avrt.lib;dwmapi.lib;comctl32.lib;dxgi.lib;dxguid.lib;d3d10_1.lib;d3dx10.lib;ws2_32.lib;Iphlpapi.lib;Winmm.lib;librtmp.lib;libmp3lame-static.lib;libfaac.lib;dsound.lib;obsapi.lib;shell32.lib;gdiplus.lib;mfplat.lib;Mfuuid.lib;Winhttp.lib;libx264.lib;UxTheme.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
