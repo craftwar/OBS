@@ -3,6 +3,8 @@ image: Visual Studio 2017
 #need set environment variable or it's not working in cache
 environment:
   nasm_Version: 2.13.03
+  #only works outside development environment
+  _LINK_: -LTCG
   matrix:
     - favor_arch: AMD64
     - favor_arch: INTEL64
