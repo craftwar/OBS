@@ -30,14 +30,3 @@ obj/
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
-*.VC.db
-
-#GCC files
-*.o
-*.d
-*.res
-*.dll
-*.a
-
-#Visual Studio Code files
-.vscode/
